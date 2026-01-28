@@ -56,7 +56,19 @@ cd packages/api
 bun run db:push
 ```
 
-### 4. Start Development Servers
+### 4. Seed Demo Accounts
+
+```bash
+cd packages/api
+bun run db:seed
+```
+
+This will create 3 demo accounts:
+- **Admin**: Phone `+27123456789`, Password `demo123`
+- **Client**: Phone `+27123456790`, Password `demo123`
+- **Worker**: Phone `+27123456791`, Password `demo123`
+
+### 5. Start Development Servers
 
 **Terminal 1 - API Server:**
 ```bash
