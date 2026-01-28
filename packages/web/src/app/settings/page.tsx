@@ -46,139 +46,140 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white py-8 md:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Account Settings</h1>
-          <p className="text-gray-600">Manage your account preferences and security</p>
+        <div className="mb-10 animate-fade-in">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">Account Settings</h1>
+          <p className="text-gray-600 text-lg">Manage your account preferences and security</p>
         </div>
 
         <div className="space-y-6">
           {/* Profile Settings */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Profile Information</h2>
-            <div className="space-y-4">
+          <div className="bg-white rounded-2xl shadow-xl p-8 card-hover animate-slide-up">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Profile Information</h2>
+            <div className="space-y-5">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
                 <input
                   type="text"
                   defaultValue={user?.fullName || ''}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Email</label>
                 <input
                   type="email"
                   defaultValue={user?.email || ''}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Phone</label>
                 <input
                   type="tel"
                   defaultValue={user?.phone || ''}
                   disabled
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl bg-gray-50"
                 />
-                <p className="mt-1 text-sm text-gray-500">Phone number cannot be changed</p>
+                <p className="mt-2 text-sm text-gray-500">Phone number cannot be changed</p>
               </div>
-              <button className="bg-teal-600 text-white px-6 py-2 rounded-lg hover:bg-teal-700 transition">
+              <button className="bg-gradient-to-r from-teal-600 to-teal-700 text-white px-8 py-3 rounded-xl hover:from-teal-700 hover:to-teal-800 transition-all duration-300 shadow-lg hover:shadow-xl hover-lift font-semibold">
                 Save Changes
               </button>
             </div>
           </div>
 
           {/* Security Settings */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Security</h2>
-            <div className="space-y-4">
-              <div>
+          <div className="bg-white rounded-2xl shadow-xl p-8 card-hover animate-slide-up" style={{ animationDelay: '0.1s' }}>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Security</h2>
+            <div className="space-y-6">
+              <div className="p-6 bg-gray-50 rounded-xl border border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">Change Password</h3>
-                <button className="text-teal-600 hover:text-teal-700 font-medium">
-                  Update Password
+                <p className="text-gray-600 mb-4">Update your password to keep your account secure</p>
+                <button className="text-teal-600 hover:text-teal-700 font-semibold transition-colors">
+                  Update Password →
                 </button>
               </div>
-              <div>
+              <div className="p-6 bg-gray-50 rounded-xl border border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">Two-Factor Authentication</h3>
-                <p className="text-gray-600 mb-2">Add an extra layer of security to your account</p>
-                <button className="text-teal-600 hover:text-teal-700 font-medium">
-                  Enable 2FA
+                <p className="text-gray-600 mb-4">Add an extra layer of security to your account</p>
+                <button className="text-teal-600 hover:text-teal-700 font-semibold transition-colors">
+                  Enable 2FA →
                 </button>
               </div>
             </div>
           </div>
 
           {/* Notification Settings */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Notifications</h2>
+          <div className="bg-white rounded-2xl shadow-xl p-8 card-hover animate-slide-up" style={{ animationDelay: '0.2s' }}>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Notifications</h2>
             <div className="space-y-4">
-              <label className="flex items-center">
-                <input type="checkbox" defaultChecked className="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded" />
-                <span className="ml-3 text-gray-700">Email notifications</span>
+              <label className="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer">
+                <input type="checkbox" defaultChecked className="h-5 w-5 text-teal-600 focus:ring-teal-500 border-gray-300 rounded" />
+                <span className="ml-4 text-gray-700 font-medium">Email notifications</span>
               </label>
-              <label className="flex items-center">
-                <input type="checkbox" defaultChecked className="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded" />
-                <span className="ml-3 text-gray-700">Push notifications</span>
+              <label className="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer">
+                <input type="checkbox" defaultChecked className="h-5 w-5 text-teal-600 focus:ring-teal-500 border-gray-300 rounded" />
+                <span className="ml-4 text-gray-700 font-medium">Push notifications</span>
               </label>
-              <label className="flex items-center">
-                <input type="checkbox" defaultChecked className="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded" />
-                <span className="ml-3 text-gray-700">SMS notifications</span>
+              <label className="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer">
+                <input type="checkbox" defaultChecked className="h-5 w-5 text-teal-600 focus:ring-teal-500 border-gray-300 rounded" />
+                <span className="ml-4 text-gray-700 font-medium">SMS notifications</span>
               </label>
             </div>
           </div>
 
           {/* Privacy Settings */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Privacy</h2>
-            <div className="space-y-4">
-              <div>
-                <Link href="/privacy" className="text-teal-600 hover:text-teal-700 font-medium">
-                  View Privacy Policy →
+          <div className="bg-white rounded-2xl shadow-xl p-8 card-hover animate-slide-up" style={{ animationDelay: '0.3s' }}>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Privacy</h2>
+            <div className="space-y-6">
+              <div className="p-6 bg-gray-50 rounded-xl border border-gray-200">
+                <Link href="/privacy" className="text-teal-600 hover:text-teal-700 font-semibold transition-colors flex items-center gap-2 group">
+                  View Privacy Policy <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </Link>
               </div>
-              <div>
+              <div className="p-6 bg-gray-50 rounded-xl border border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">Data Export</h3>
-                <p className="text-gray-600 mb-2">Download a copy of your data</p>
-                <button className="text-teal-600 hover:text-teal-700 font-medium">
-                  Export My Data
+                <p className="text-gray-600 mb-4">Download a copy of your data</p>
+                <button className="text-teal-600 hover:text-teal-700 font-semibold transition-colors">
+                  Export My Data →
                 </button>
               </div>
             </div>
           </div>
 
           {/* Danger Zone */}
-          <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6">
-            <h2 className="text-2xl font-semibold text-red-900 mb-4">Danger Zone</h2>
+          <div className="bg-gradient-to-br from-red-50 to-red-100 border-2 border-red-200 rounded-2xl p-8 card-hover animate-slide-up" style={{ animationDelay: '0.4s' }}>
+            <h2 className="text-2xl md:text-3xl font-bold text-red-900 mb-6">Danger Zone</h2>
             
-            <div className="space-y-4">
-              <div>
+            <div className="space-y-6">
+              <div className="p-6 bg-white rounded-xl border border-red-200">
                 <h3 className="text-lg font-semibold text-red-800 mb-2">Deactivate Account</h3>
-                <p className="text-red-700 mb-4">
+                <p className="text-red-700 mb-4 leading-relaxed">
                   Temporarily disable your account. You can reactivate it anytime by logging in.
                 </p>
                 {!showDeactivateConfirm ? (
                   <button
                     onClick={() => setShowDeactivateConfirm(true)}
-                    className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition"
+                    className="bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl hover-lift font-semibold"
                   >
                     Deactivate Account
                   </button>
                 ) : (
-                  <div className="space-y-3">
-                    <p className="text-red-800 font-medium">Are you sure you want to deactivate your account?</p>
+                  <div className="space-y-4">
+                    <p className="text-red-800 font-semibold">Are you sure you want to deactivate your account?</p>
                     <div className="flex gap-3">
                       <button
                         onClick={handleDeactivate}
                         disabled={loading}
-                        className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition disabled:opacity-50"
+                        className="bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 font-semibold"
                       >
                         {loading ? 'Deactivating...' : 'Yes, Deactivate'}
                       </button>
                       <button
                         onClick={() => setShowDeactivateConfirm(false)}
-                        className="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition"
+                        className="bg-gray-300 text-gray-700 px-6 py-3 rounded-xl hover:bg-gray-400 transition-all duration-300 font-semibold"
                       >
                         Cancel
                       </button>
@@ -187,30 +188,30 @@ export default function SettingsPage() {
                 )}
               </div>
 
-              <div className="pt-4 border-t border-red-200">
+              <div className="p-6 bg-white rounded-xl border border-red-200 pt-6 border-t-2">
                 <h3 className="text-lg font-semibold text-red-800 mb-2">Delete Account</h3>
-                <p className="text-red-700 mb-4">
+                <p className="text-red-700 mb-4 leading-relaxed">
                   Permanently delete your account and all associated data. This action cannot be undone.
                 </p>
                 {!showDeleteConfirm ? (
                   <button
                     onClick={() => setShowDeleteConfirm(true)}
-                    className="bg-red-700 text-white px-6 py-2 rounded-lg hover:bg-red-800 transition"
+                    className="bg-red-700 text-white px-6 py-3 rounded-xl hover:bg-red-800 transition-all duration-300 shadow-lg hover:shadow-xl hover-lift font-semibold"
                   >
                     Delete Account
                   </button>
                 ) : (
-                  <div className="space-y-3">
-                    <p className="text-red-800 font-medium mb-2">This action is permanent and cannot be undone.</p>
+                  <div className="space-y-4">
+                    <p className="text-red-800 font-semibold mb-2">This action is permanent and cannot be undone.</p>
                     <div>
-                      <label className="block text-sm font-medium text-red-800 mb-2">
+                      <label className="block text-sm font-semibold text-red-800 mb-2">
                         Please tell us why you're deleting your account (optional)
                       </label>
                       <textarea
                         value={deleteReason}
                         onChange={(e) => setDeleteReason(e.target.value)}
                         rows={3}
-                        className="w-full px-4 py-2 border border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        className="w-full px-4 py-3 border-2 border-red-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all"
                         placeholder="Help us improve by sharing your feedback..."
                       />
                     </div>
@@ -218,7 +219,7 @@ export default function SettingsPage() {
                       <button
                         onClick={handleDelete}
                         disabled={loading}
-                        className="bg-red-700 text-white px-6 py-2 rounded-lg hover:bg-red-800 transition disabled:opacity-50"
+                        className="bg-red-700 text-white px-6 py-3 rounded-xl hover:bg-red-800 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 font-semibold"
                       >
                         {loading ? 'Deleting...' : 'Yes, Delete Forever'}
                       </button>
@@ -227,7 +228,7 @@ export default function SettingsPage() {
                           setShowDeleteConfirm(false)
                           setDeleteReason('')
                         }}
-                        className="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition"
+                        className="bg-gray-300 text-gray-700 px-6 py-3 rounded-xl hover:bg-gray-400 transition-all duration-300 font-semibold"
                       >
                         Cancel
                       </button>
@@ -242,4 +243,3 @@ export default function SettingsPage() {
     </div>
   )
 }
-
