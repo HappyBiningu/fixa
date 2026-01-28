@@ -1,6 +1,6 @@
 import { eq, and } from "drizzle-orm";
 import { db } from "../db";
-import { bids, jobs, credits, creditTransactions, users, workerProfiles } from "../db/schema";
+import { bids, jobs, credits, creditTransactions, users, workerProfiles, categories } from "../db/schema";
 import { calculateBidCost } from "../utils/creditCalculator";
 import { sql } from "drizzle-orm";
 
@@ -221,6 +221,22 @@ export class BidService {
     
     // Credits are non-refundable per blueprint
     return { message: "Bid withdrawn" };
+  }
+  
+  async getMyBids(workerId: string) {
+    const myBids = await db
+      .select({
+        bid: bids,
+        job: jobs,
+        category: categories,
+      })
+      .from(bids)
+      .innerJoin(jobs, eq(bids.jobId, jobs.id))
+      .leftJoin(categories, eq(jobs.categoryId, categories.id))
+      .where(eq(bids.workerId, workerId))
+      .orderBy(sql`${bids.createdAt} DESC`);
+    
+    return myBids;
   }
 }
 

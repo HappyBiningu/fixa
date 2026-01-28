@@ -1,15 +1,16 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
-import { jobsApi } from '@/lib/api'
+import { jobsApi, categoriesApi } from '@/lib/api'
 import toast from 'react-hot-toast'
 
 export default function CreateJobPage() {
   const router = useRouter()
   const { token } = useAuthStore()
   const [loading, setLoading] = useState(false)
+  const [categories, setCategories] = useState<any[]>([])
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -27,6 +28,18 @@ export default function CreateJobPage() {
     visibilityRadius: 10,
     photos: [] as string[],
   })
+
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const res = await categoriesApi.getAll()
+        setCategories(res.data || [])
+      } catch (error) {
+        console.error('Failed to load categories')
+      }
+    }
+    loadCategories()
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -111,13 +124,11 @@ export default function CreateJobPage() {
               onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}
             >
               <option value="">Select a category</option>
-              <option value="cleaning">Cleaning</option>
-              <option value="gardening">Gardening</option>
-              <option value="plumbing">Plumbing</option>
-              <option value="electrical">Electrical</option>
-              <option value="painting">Painting</option>
-              <option value="carpentry">Carpentry</option>
-              <option value="other">Other</option>
+              {categories.map((cat: any) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.icon} {cat.name}
+                </option>
+              ))}
             </select>
           </div>
 

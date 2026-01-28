@@ -174,8 +174,8 @@ export default function TermsPage() {
             <div className="mt-4 p-4 bg-gray-50 rounded-lg">
               <p className="text-gray-700">
                 <strong>Email:</strong> legal@fixa.com<br />
-                <strong>Phone:</strong> +27 12 345 6789<br />
-                <strong>Address:</strong> Pretoria, South Africa
+                <strong>Phone:</strong> +27 698 944 682<br />
+                <strong>Address:</strong> Johannesburg, South Africa
               </p>
             </div>
           </section>

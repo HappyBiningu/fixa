@@ -1,7 +1,8 @@
 import { eq } from "drizzle-orm";
 import { db } from "../db";
-import { credits, creditTransactions } from "../db/schema";
+import { credits, creditTransactions, jobs, users } from "../db/schema";
 import { sql } from "drizzle-orm";
+import { calculateBidCost } from "../utils/creditCalculator";
 
 export class CreditService {
   async getBalance(userId: string) {
@@ -85,9 +86,30 @@ export class CreditService {
   }
   
   async calculateBidCost(jobId: string, userId: string) {
-    // This would fetch job details and calculate
-    // For now, return a placeholder
-    return { cost: 2 };
+    const [job] = await db
+      .select()
+      .from(jobs)
+      .where(eq(jobs.id, jobId))
+      .limit(1);
+    
+    if (!job) {
+      throw new Error("Job not found");
+    }
+    
+    const [user] = await db
+      .select()
+      .from(users)
+      .where(eq(users.id, userId))
+      .limit(1);
+    
+    const cost = calculateBidCost({
+      budgetAmount: job.budgetAmount ? parseFloat(job.budgetAmount) : 0,
+      urgency: job.urgency,
+      bidsCount: job.bidsCount || 0,
+      isProWorker: user?.subscriptionTier === "pro" || user?.subscriptionTier === "elite",
+    });
+    
+    return { cost };
   }
 }
 

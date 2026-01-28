@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
 export const api = axios.create({
-  baseURL: "/api",
+  baseURL: `${API_URL}/api`,
   headers: {
     "Content-Type": "application/json",
   },
@@ -74,3 +76,8 @@ export const messagesApi = {
   sendMessage: (jobId: string, data: any) => api.post(`/messages/jobs/${jobId}/messages`, data),
 };
 
+// Categories
+export const categoriesApi = {
+  getAll: () => api.get('/categories'),
+  getById: (id: string) => api.get(`/categories/${id}`),
+};

@@ -55,7 +55,7 @@ export default function CookiePolicyPage() {
             <div className="mt-4 p-4 bg-gray-50 rounded-lg">
               <p className="text-gray-700">
                 <strong>Email:</strong> privacy@fixa.com<br />
-                <strong>Phone:</strong> +27 12 345 6789
+                <strong>Phone:</strong> +27 698 944 682
               </p>
             </div>
           </section>
