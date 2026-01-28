@@ -47,7 +47,7 @@ app.use("/api/categories", categoryRoutes);
 // Error handler
 app.use(errorHandler);
 
-app.listen(PORT, () => {
+app.listen(Number(PORT), "0.0.0.0", () => {
   console.log(`🚀 Fixa API server running on port ${PORT}`);
   console.log(`📡 Environment: ${process.env.NODE_ENV || "development"}`);
 });
