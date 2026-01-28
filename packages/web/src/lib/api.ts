@@ -24,6 +24,9 @@ export const authApi = {
   verifyPhone: (data: any) => api.post("/auth/verify-phone", data),
   login: (data: any) => api.post("/auth/login", data),
   getMe: () => api.get("/auth/me"),
+  updateProfile: (data: any) => api.put("/auth/me", data),
+  deactivateAccount: () => api.post("/auth/me/deactivate"),
+  deleteAccount: () => api.post("/auth/me/delete"),
 };
 
 // Jobs

@@ -18,9 +18,16 @@ export default function RegisterPage() {
   })
   const [otp, setOtp] = useState('')
   const [loading, setLoading] = useState(false)
+  const [acceptedTerms, setAcceptedTerms] = useState(false)
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    if (!acceptedTerms) {
+      toast.error('You must accept the Terms and Conditions to register')
+      return
+    }
+    
     setLoading(true)
 
     try {
@@ -132,10 +139,35 @@ export default function RegisterPage() {
               </div>
             </div>
 
+            <div className="flex items-start">
+              <div className="flex items-center h-5">
+                <input
+                  id="terms"
+                  type="checkbox"
+                  required
+                  checked={acceptedTerms}
+                  onChange={(e) => setAcceptedTerms(e.target.checked)}
+                  className="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded"
+                />
+              </div>
+              <div className="ml-3 text-sm">
+                <label htmlFor="terms" className="text-gray-700">
+                  I agree to the{' '}
+                  <Link href="/terms" target="_blank" className="text-teal-600 hover:text-teal-700 font-medium">
+                    Terms and Conditions
+                  </Link>
+                  {' '}and{' '}
+                  <Link href="/privacy" target="_blank" className="text-teal-600 hover:text-teal-700 font-medium">
+                    Privacy Policy
+                  </Link>
+                </label>
+              </div>
+            </div>
+
             <div>
               <button
                 type="submit"
-                disabled={loading}
+                disabled={loading || !acceptedTerms}
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:opacity-50"
               >
                 {loading ? 'Registering...' : 'Register'}
