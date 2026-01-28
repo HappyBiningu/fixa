@@ -18,16 +18,14 @@ export default function RegisterPage() {
   })
   const [otp, setOtp] = useState('')
   const [loading, setLoading] = useState(false)
-  const [acceptedTerms, setAcceptedTerms] = useState(false)
+  const [agreeToTerms, setAgreeToTerms] = useState(false)
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
-    
-    if (!acceptedTerms) {
-      toast.error('You must accept the Terms and Conditions to register')
+    if (!agreeToTerms) {
+      toast.error('You must agree to the Terms & Conditions and Privacy Policy.')
       return
     }
-    
     setLoading(true)
 
     try {
@@ -58,166 +56,182 @@ export default function RegisterPage() {
 
   if (step === 1) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
-          <div>
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              Create your Fixa account
-            </h2>
-            <p className="mt-2 text-center text-sm text-gray-600">
-              Already have an account?{' '}
-              <Link href="/login" className="font-medium text-teal-600 hover:text-teal-500">
-                Sign in
-              </Link>
-            </p>
-          </div>
-          <form className="mt-8 space-y-6" onSubmit={handleRegister}>
-            <div className="space-y-4">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-white py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full space-y-8 animate-fade-in">
+          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10">
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                </svg>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+                Create your Fixa account
+              </h2>
+              <p className="text-gray-600">
+                Already have an account?{' '}
+                <Link href="/login" className="font-semibold text-teal-600 hover:text-teal-700 transition-colors">
+                  Sign in
+                </Link>
+              </p>
+            </div>
+            
+            <form className="space-y-6" onSubmit={handleRegister}>
+              <div className="space-y-5">
+                <div>
+                  <label htmlFor="role" className="block text-sm font-semibold text-gray-700 mb-2">
+                    I want to
+                  </label>
+                  <select
+                    id="role"
+                    value={formData.role}
+                    onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all bg-white"
+                  >
+                    <option value="client">Post jobs (Client)</option>
+                    <option value="worker">Find work (Worker)</option>
+                    <option value="both">Both</option>
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Phone Number *
+                  </label>
+                  <input
+                    id="phone"
+                    type="tel"
+                    required
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all"
+                    placeholder="+27123456789"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="fullName" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Full Name
+                  </label>
+                  <input
+                    id="fullName"
+                    type="text"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all"
+                    placeholder="John Doe"
+                    value={formData.fullName}
+                    onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all"
+                    placeholder="john@example.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Password (optional)
+                  </label>
+                  <input
+                    id="password"
+                    type="password"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all"
+                    placeholder="Create a password"
+                    value={formData.password}
+                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  />
+                </div>
+                <div className="flex items-start gap-3 p-4 bg-teal-50 rounded-xl border border-teal-100">
+                  <input
+                    id="agreeToTerms"
+                    name="agreeToTerms"
+                    type="checkbox"
+                    required
+                    className="h-5 w-5 text-teal-600 focus:ring-teal-500 border-gray-300 rounded mt-0.5 flex-shrink-0"
+                    checked={agreeToTerms}
+                    onChange={(e) => setAgreeToTerms(e.target.checked)}
+                  />
+                  <label htmlFor="agreeToTerms" className="text-sm text-gray-700 leading-relaxed">
+                    I agree to the{' '}
+                    <Link href="/terms" className="font-semibold text-teal-600 hover:text-teal-700 transition-colors" target="_blank">
+                      Terms & Conditions
+                    </Link>{' '}
+                    and{' '}
+                    <Link href="/privacy" className="font-semibold text-teal-600 hover:text-teal-700 transition-colors" target="_blank">
+                      Privacy Policy
+                    </Link>
+                  </label>
+                </div>
+              </div>
+
               <div>
-                <label htmlFor="role" className="block text-sm font-medium text-gray-700">
-                  I want to
-                </label>
-                <select
-                  id="role"
-                  value={formData.role}
-                  onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                <button
+                  type="submit"
+                  disabled={loading || !agreeToTerms}
+                  className="w-full bg-gradient-to-r from-teal-600 to-teal-700 text-white py-4 rounded-xl font-semibold hover:from-teal-700 hover:to-teal-800 transition-all duration-300 shadow-lg hover:shadow-xl hover-lift disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <option value="client">Post jobs (Client)</option>
-                  <option value="worker">Find work (Worker)</option>
-                  <option value="both">Both</option>
-                </select>
+                  {loading ? 'Registering...' : 'Register'}
+                </button>
               </div>
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                  Phone Number *
-                </label>
-                <input
-                  id="phone"
-                  type="tel"
-                  required
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                />
-              </div>
-              <div>
-                <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
-                  Full Name
-                </label>
-                <input
-                  id="fullName"
-                  type="text"
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
-                  value={formData.fullName}
-                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                />
-              </div>
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                  Password (optional)
-                </label>
-                <input
-                  id="password"
-                  type="password"
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                />
-              </div>
-            </div>
-
-            <div className="flex items-start">
-              <div className="flex items-center h-5">
-                <input
-                  id="terms"
-                  type="checkbox"
-                  required
-                  checked={acceptedTerms}
-                  onChange={(e) => setAcceptedTerms(e.target.checked)}
-                  className="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded"
-                />
-              </div>
-              <div className="ml-3 text-sm">
-                <label htmlFor="terms" className="text-gray-700">
-                  I agree to the{' '}
-                  <Link href="/terms" target="_blank" className="text-teal-600 hover:text-teal-700 font-medium">
-                    Terms and Conditions
-                  </Link>
-                  {' '}and{' '}
-                  <Link href="/privacy" target="_blank" className="text-teal-600 hover:text-teal-700 font-medium">
-                    Privacy Policy
-                  </Link>
-                </label>
-              </div>
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                disabled={loading || !acceptedTerms}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:opacity-50"
-              >
-                {loading ? 'Registering...' : 'Register'}
-              </button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Verify your phone
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Enter the code sent to {formData.phone}
-          </p>
-        </div>
-        <form className="mt-8 space-y-6" onSubmit={handleVerify}>
-          <div>
-            <label htmlFor="otp" className="block text-sm font-medium text-gray-700">
-              OTP Code
-            </label>
-            <input
-              id="otp"
-              type="text"
-              required
-              maxLength={6}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 text-center text-2xl tracking-widest"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
-            />
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-white py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8 animate-fade-in">
+        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10">
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+              Verify your phone
+            </h2>
+            <p className="text-gray-600">
+              Enter the code sent to {formData.phone}
+            </p>
           </div>
+          
+          <form className="space-y-6" onSubmit={handleVerify}>
+            <div>
+              <label htmlFor="otp" className="block text-sm font-semibold text-gray-700 mb-2">
+                OTP Code
+              </label>
+              <input
+                id="otp"
+                type="text"
+                required
+                maxLength={6}
+                className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all text-center text-3xl tracking-widest font-mono"
+                placeholder="000000"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
+              />
+            </div>
 
-          <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:opacity-50"
-            >
-              {loading ? 'Verifying...' : 'Verify'}
-            </button>
-          </div>
-        </form>
+            <div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-gradient-to-r from-teal-600 to-teal-700 text-white py-4 rounded-xl font-semibold hover:from-teal-700 hover:to-teal-800 transition-all duration-300 shadow-lg hover:shadow-xl hover-lift disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? 'Verifying...' : 'Verify'}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   )
 }
-
