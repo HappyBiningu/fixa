@@ -1,0 +1,23 @@
+{
+  "name": "fixa",
+  "version": "1.0.0",
+  "description": "Fixa - Hyperlocal Job Marketplace",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "cd packages/api && bun run dev",
+    "dev:web": "cd packages/web && bun run dev",
+    "dev:mobile": "cd packages/mobile && bun run start",
+    "build:api": "cd packages/api && bun run build",
+    "build:web": "cd packages/web && bun run build",
+    "db:generate": "cd packages/api && bun run db:generate",
+    "db:migrate": "cd packages/api && bun run db:migrate",
+    "db:push": "cd packages/api && bun run db:push"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0"
+  }
+}
+
