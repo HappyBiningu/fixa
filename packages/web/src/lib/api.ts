@@ -45,6 +45,7 @@ export const jobsApi = {
 export const bidsApi = {
   create: (jobId: string, data: any) => api.post(`/bids/jobs/${jobId}/bids`, data),
   getJobBids: (jobId: string) => api.get(`/bids/jobs/${jobId}/bids`),
+  getMyBids: () => api.get("/bids/my-bids"),
   accept: (id: string) => api.post(`/bids/${id}/accept`),
   withdraw: (id: string) => api.post(`/bids/${id}/withdraw`),
 };
@@ -80,4 +81,10 @@ export const messagesApi = {
 export const categoriesApi = {
   getAll: () => api.get('/categories'),
   getById: (id: string) => api.get(`/categories/${id}`),
+};
+
+// Notifications
+export const notificationsApi = {
+  getAll: () => api.get('/notifications'),
+  markAsRead: (id: string) => api.put(`/notifications/${id}/read`),
 };

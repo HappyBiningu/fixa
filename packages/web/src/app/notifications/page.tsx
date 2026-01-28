@@ -3,13 +3,8 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
-import { api } from '@/lib/api'
+import { notificationsApi } from '@/lib/api'
 import toast from 'react-hot-toast'
-
-const notificationsApi = {
-  getAll: () => api.get('/notifications'),
-  markAsRead: (id: string) => api.put(`/notifications/${id}/read`),
-}
 
 export default function NotificationsPage() {
   const router = useRouter()
